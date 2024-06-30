@@ -5,9 +5,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Concert extends Event {
+    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
     private double price;
     private LocalTime time;
-    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     public Concert(String title, int totalPax, LocalDate date, LocalTime time, double price) {
         super(title, totalPax, date);
@@ -15,12 +15,14 @@ public class Concert extends Event {
         this.price = price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
+    //Getters and Setters
     public double getPrice() {
         return this.price;
+    }
+
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getFormattedPrice() {

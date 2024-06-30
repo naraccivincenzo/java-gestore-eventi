@@ -6,21 +6,22 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class Event {
-    private String title;
-    private int totalPax;
-    private int bookedPax;
     private static final ZoneId EUROPE = ZoneId.of("Europe/Rome");
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy").withLocale(Locale.ITALY);
+    private final int TOTAL_PAX;
+    private final LocalDate TODAY = LocalDate.now(EUROPE);
+    private String title;
+    private int bookedPax;
     private LocalDate date;
-    private LocalDate today = LocalDate.now(EUROPE);
 
-    public Event(String title, int totalPax, LocalDate date) {
+    public Event(String title, int TOTAL_PAX, LocalDate date) {
         this.title = title;
-        this.totalPax = totalPax;
+        this.TOTAL_PAX = TOTAL_PAX;
         this.bookedPax = 0;
         this.date = date;
     }
 
+    //Getters and Setters
     public String getTitle() {
         return this.title;
     }
@@ -29,28 +30,37 @@ public class Event {
         this.title = title;
     }
 
+    public String getFormattedDate() {
+        return this.date.format(FORMATTER);
+    }
+
+    public LocalDate getDate() {
+        return this.date;
+    }
+
     public void setDate(LocalDate date) {
         this.date = date;
     }
 
-    public String getDate() {
-        return this.date.format(FORMATTER);
-    }
-
     public int getTotalPax() {
-        return this.totalPax;
+        return this.TOTAL_PAX;
     }
 
-    public int bookedPax() {
+    public int getBookedPax() {
         return this.bookedPax;
     }
 
+    public int getVacancies() {
+        return this.TOTAL_PAX - this.bookedPax;
+    }
+
+    //Methods
     public boolean checkBookedPax() {
-        return this.bookedPax >= this.totalPax;
+        return this.bookedPax >= this.TOTAL_PAX;
     }
 
     public boolean checkDate(LocalDate date) {
-        return date.isAfter(today);
+        return date.isAfter(TODAY);
     }
 
     public void book(LocalDate date) {
@@ -73,10 +83,6 @@ public class Event {
         } else if (bookedPax <= 0) {
             System.out.println("The event not has people booked");
         }
-    }
-
-    public int getVacancies() {
-        return this.totalPax - this.bookedPax;
     }
 
     @Override
