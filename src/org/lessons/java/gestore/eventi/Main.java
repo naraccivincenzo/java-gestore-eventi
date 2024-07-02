@@ -14,8 +14,8 @@ public class Main {
         System.out.println("Insert the month of the event:");
         int eventMonth = scanner.nextInt();
         System.out.println("Insert the day of the event:");
-        int eventday = scanner.nextInt();
-        LocalDate eventDate = LocalDate.of(eventYear, eventMonth, eventday);
+        int eventDay = scanner.nextInt();
+        LocalDate eventDate = LocalDate.of(eventYear, eventMonth, eventDay);
         System.out.println("Insert the maximum number of people for the event:");
         int eventTotalPax = scanner.nextInt();
         scanner.nextLine();
